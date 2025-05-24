@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}Inicio - Aprendizaje por Refuerzo{% endblock %}
+
+{% block content %}
+    <h1>Aprendizaje por Refuerzo (RL)</h1>
+    <p>
+        El Aprendizaje por Refuerzo es un área del Machine Learning donde un agente aprende a tomar decisiones
+        interactuando con un entorno para alcanzar un objetivo. El agente recibe recompensas o castigos
+        basados en sus acciones, y su meta es maximizar la recompensa acumulada a lo largo del tiempo.
+    </p>
+    
+    <h2>Conceptos Clave en RL:</h2>
+    <ul>
+        <li><strong>Agente:</strong> La entidad que aprende y toma decisiones.</li>
+        <li><strong>Entorno:</strong> El mundo con el que el agente interactúa.</li>
+        <li><strong>Estado (S):</strong> Una representación de la situación actual del entorno.</li>
+        <li><strong>Acción (A):</strong> Una decisión que el agente puede tomar en un estado.</li>
+        <li><strong>Recompensa (R):</strong> Una señal numérica que el agente recibe del entorno después de tomar una acción. Indica cuán buena fue la acción.</li>
+        <li><strong>Política (π):</strong> La estrategia que utiliza el agente para decidir qué acción tomar en cada estado.</li>
+        <li><strong>Función de Valor (V o Q):</strong> Estima la recompensa futura esperada desde un estado (V) o desde un par estado-acción (Q).</li>
+    </ul>
+
+    <h2>Algoritmo Q-Learning</h2>
+    <p>
+        Q-Learning es un algoritmo de RL "model-free" (no necesita conocer el modelo del entorno) y "off-policy" (puede aprender la política óptima incluso si sigue una política de exploración).
+        Aprende una función de valor acción (Q-value) que estima la recompensa futura esperada si se toma una acción 'a' en un estado 's' y se sigue la política óptima a partir de entonces.
+        La actualización de la Q-table se realiza mediante la ecuación de Bellman:
+    </p>
+    <p><code>Q(s,a) ← Q(s,a) + α * [R + γ * max_a' Q(s',a') - Q(s,a)]</code></p>
+    <ul>
+        <li><code>α</code> (alfa): Tasa de aprendizaje.</li>
+        <li><code>γ</code> (gamma): Factor de descuento para recompensas futuras.</li>
+        <li><code>s'</code>: Siguiente estado.</li>
+        <li><code>max_a' Q(s',a')</code>: Máximo Q-value esperado para el siguiente estado.</li>
+    </ul>
+    <p>
+        Este sitio demuestra la aplicación de Q-Learning al entorno "FrozenLake".
+    </p>
+{% endblock %}

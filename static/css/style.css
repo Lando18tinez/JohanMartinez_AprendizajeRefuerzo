@@ -1,0 +1,110 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 20px;
+    background-color: #fff;
+    padding-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+nav {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+    margin-bottom: 20px;
+}
+
+nav ul {
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+nav a:hover {
+    color: #ddd;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding-top: 30px;
+    min-height: 70px;
+    border-bottom: #0779e4 3px solid;
+    text-align: center;
+}
+
+header h1 {
+    margin:0;
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+img.results-plot {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+}
+
+table.q-table, table.policy-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table.q-table th, table.q-table td,
+table.policy-table th, table.policy-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+table.q-table th, table.policy-table th {
+    background-color: #f2f2f2;
+}
+
+.simulation-step {
+    border: 1px solid #eee;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+.simulation-step pre {
+    white-space: pre-wrap; /* Permite que el tablero se ajuste */
+    word-wrap: break-word;
+    background-color: #e0e0e0;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+    color: #777;
+    background: #333;
+    color: #fff;
+}

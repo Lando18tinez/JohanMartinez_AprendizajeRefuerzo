@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}Simulación del Agente{% endblock %}
+
+{% block content %}
+    <h1>Simulación del Agente en FrozenLake</h1>
+    <p>
+        A continuación, se muestra una secuencia de pasos tomados por el agente entrenado en un episodio del entorno FrozenLake.
+        El agente utiliza la política aprendida (derivada de la Q-Table) para tomar decisiones.
+    </p>
+    <p><em>Nota: 'S' es inicio, 'F' es hielo, 'H' es agujero, 'G' es objetivo. La casilla resaltada es la posición actual del agente.</em></p>
+
+    {% if simulation_steps %}
+        {% for step_info in simulation_steps %}
+        <div class="simulation-step">
+            <h4>Paso {{ step_info.step }}</h4>
+            <p>
+                Estado Actual: {{ step_info.state }}<br>
+                Acción Tomada: {{ step_info.action_name }} (código: {{ step_info.action_code }})<br>
+                Recompensa Obtenida: {{ step_info.reward }}<br>
+                Nuevo Estado: {{ step_info.new_state }}<br>
+                ¿Terminado?: {{ step_info.terminated }} | ¿Truncado?: {{ step_info.truncated }}
+            </p>
+            <p><strong>Tablero del Entorno (después de la acción):</strong></p>
+            <pre>{{ step_info.board }}</pre>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No se pudo ejecutar la simulación. Asegúrate de que el agente ha sido entrenado y la Q-table está disponible.</p>
+    {% endif %}
+{% endblock %}

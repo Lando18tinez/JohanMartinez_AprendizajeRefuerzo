@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block title %}Resultados del Entrenamiento{% endblock %}
+
+{% block content %}
+    <h1>Resultados del Entrenamiento del Agente</h1>
+
+    <h2>Evolución de la Recompensa por Episodio</h2>
+    <p>
+        El siguiente gráfico muestra la recompensa promedio móvil (ventana de 100 episodios) obtenida por el agente a lo largo del proceso de entrenamiento.
+        Un aumento en esta curva indica que el agente está aprendiendo a tomar mejores decisiones para alcanzar el objetivo.
+    </p>
+    <img src="{{ url_for('static', filename='images/rewards_plot.png') }}" alt="Gráfico de Recompensas por Episodio" class="results-plot">
+
+    <h2>Política Aprendida</h2>
+    <p>
+        La política muestra la acción que el agente considera óptima en cada estado. Las acciones se representan con flechas:
+        ← (Izquierda), ↓ (Abajo), → (Derecha), ↑ (Arriba).
+    </p>
+    <table class="policy-table">
+        <thead>
+            <tr>
+                <th colspan="4">Política Óptima (Mejor Acción por Estado)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(0, policy|length, 4) %}
+            <tr>
+                <td>{{ policy[i] }}</td>
+                <td>{{ policy[i+1] }}</td>
+                <td>{{ policy[i+2] }}</td>
+                <td>{{ policy[i+3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p><em>Nota: Los estados se leen de izquierda a derecha, de arriba abajo, comenzando en 0.</em></p>
+    
+    <h2>Q-Table (Valores Q Aprendidos)</h2>
+    <p>
+        La Q-Table almacena el valor esperado de tomar cada acción en cada estado.
+        (Filas: Estados 0-15, Columnas: Acciones 0-Izquierda, 1-Abajo, 2-Derecha, 3-Arriba)
+    </p>
+    <table class="q-table">
+        <thead>
+            <tr>
+                <th>Estado</th>
+                <th>Acción 0 (Izquierda)</th>
+                <th>Acción 1 (Abajo)</th>
+                <th>Acción 2 (Derecha)</th>
+                <th>Acción 3 (Arriba)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(q_table|length) %}
+            <tr>
+                <td>{{ i }}</td>
+                <td>{{ "%.4f"|format(q_table[i][0]) }}</td>
+                <td>{{ "%.4f"|format(q_table[i][1]) }}</td>
+                <td>{{ "%.4f"|format(q_table[i][2]) }}</td>
+                <td>{{ "%.4f"|format(q_table[i][3]) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Análisis Adicional</h2>
+    <ul>
+        <li><strong>Recompensa promedio en evaluación (1000 episodios):</strong> {{ evaluation_results.avg_reward }}</li>
+        <li><strong>Tasa de éxito en evaluación (1000 episodios):</strong> {{ "%.2f"|format(evaluation_results.success_rate * 100) }}%</li>
+        <li>
+            <strong>Número de episodios para aprender:</strong> Basado en la gráfica de recompensas, el agente comienza a mostrar un aprendizaje consistente
+            cuando la recompensa promedio móvil supera un umbral (e.g., 0.5-0.7) y se estabiliza. Esto suele ocurrir después de varios miles de episodios.
+            En este caso, con los parámetros usados, se observa una mejora significativa alrededor de los 5000-10000 episodios, estabilizándose más adelante.
+        </li>
+    </ul>
+{% endblock %}

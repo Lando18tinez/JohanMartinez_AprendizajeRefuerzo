@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block title %}Descripción del Entorno: FrozenLake{% endblock %}
+
+{% block content %}
+    <h1>Entorno: FrozenLake-v1</h1>
+    <p>
+        FrozenLake es un entorno clásico de la librería Gymnasium (antes OpenAI Gym) utilizado para probar algoritmos de Aprendizaje por Refuerzo.
+    </p>
+    
+    <h2>Objetivo</h2>
+    <p>
+        El agente controla el movimiento de un personaje en un lago helado y resbaladizo. El objetivo es navegar desde una casilla de inicio ('S') hasta una casilla objetivo ('G') sin caer en agujeros ('H').
+    </p>
+
+    <h2>Descripción</h2>
+    <ul>
+        <li><strong>Cuadrícula:</strong> Típicamente una cuadrícula de 4x4 (16 estados).
+            <pre>
+S F F F  (S: inicio, F: hielo, H: agujero, G: objetivo)
+F H F H
+F F F H
+H F F G
+            </pre>
+        </li>
+        <li><strong>Estados (S):</strong> Cada una de las 16 casillas es un estado único, numerado de 0 a 15.</li>
+        <li><strong>Acciones (A):</strong> Hay 4 acciones posibles en cada estado:
+            <ul>
+                <li>0: Izquierda</li>
+                <li>1: Abajo</li>
+                <li>2: Derecha</li>
+                <li>3: Arriba</li>
+            </ul>
+        </li>
+        <li><strong>Recompensas (R):</strong>
+            <ul>
+                <li>+1: Si el agente alcanza la casilla objetivo ('G').</li>
+                <li>0: Para todas las demás transiciones (incluyendo caer en un agujero 'H').</li>
+            </ul>
+        </li>
+        <li><strong>Dinámica del Entorno (Transiciones):</strong>
+            El entorno es estocástico debido al "hielo resbaladizo" (<code>is_slippery=True</code>).
+            Cuando el agente elige una acción, hay una probabilidad de 1/3 de que se mueva en la dirección deseada, 1/3 de que se desvíe 90 grados a la izquierda, y 1/3 de que se desvíe 90 grados a la derecha.
+            Si el movimiento resultante lo lleva fuera de la cuadrícula, permanece en la casilla actual.
+        </li>
+        <li><strong>Fin del Episodio:</strong> Un episodio termina si el agente llega a 'G' (éxito) o cae en 'H' (fallo). También puede terminar si se alcanza un número máximo de pasos.</li>
+    </ul>
+
+    <h2>Justificación del Aprendizaje por Refuerzo</h2>
+    <p>
+        Este problema es adecuado para RL porque:
+    </p>
+    <ul>
+        <li>Requiere una secuencia de decisiones para alcanzar un objetivo.</li>
+        <li>La recompensa principal se obtiene al final, lo que requiere que el agente aprenda el valor de los estados intermedios.</li>
+        <li>La naturaleza resbaladiza del hielo introduce estocasticidad, que los algoritmos de RL pueden manejar.</li>
+        <li>El agente debe aprender a través de la experiencia (ensayo y error) sin un modelo explícito de las probabilidades de transición.</li>
+    </ul>
+{% endblock %}
