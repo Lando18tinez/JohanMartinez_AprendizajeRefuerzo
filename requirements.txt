@@ -2,3 +2,4 @@ gymnasium
 matplotlib 
 numpy
 #pickle
+gunicorn
